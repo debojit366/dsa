@@ -37,10 +37,21 @@ Node* deleteHead(Node* head){
     delete prev;
     return head;
 }
+Node* deleteTail(Node* head){
+    Node* temp = head;
+    while(temp->next != nullptr){
+        temp = temp->next;
+    }
+    Node* prev = temp->back;
+    temp->back = nullptr;
+    prev->next = nullptr;
+    delete temp;
+    return head;
+}
 int main(){
     vector <int> arr = {12,5,6,7};
     Node* head = arr2DLL(arr);
-    Node* newHead = deleteHead(head);
+    Node* newHead = deleteTail(head);
     Node* temp = newHead;
     while(temp){
         cout<<temp->data<<" ";

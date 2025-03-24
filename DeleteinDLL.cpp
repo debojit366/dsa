@@ -48,10 +48,40 @@ Node* deleteTail(Node* head){
     delete temp;
     return head;
 }
+Node* deleteK(Node* head,int k){
+    if(head == nullptr) return nullptr;
+    int cnt = 1;
+    Node* temp = head;
+    if(k==1){
+        Node* front = temp->next;
+        temp->next = nullptr;
+        delete temp;
+        return front;
+    }
+    while(cnt != k){
+        temp = temp->next;
+        cnt++;
+    }
+    if(temp->next == nullptr){
+        Node* prev = temp->back;
+        temp->back = nullptr;
+        prev->next = nullptr;
+        delete temp;
+        return head;
+    }
+    Node* prev = temp->back;
+    Node* front = temp->next;
+    temp->back = nullptr;
+    temp->next = nullptr;
+    front->back =prev;
+    prev->next = front;
+    delete temp;
+    return head;
+}
 int main(){
     vector <int> arr = {12,5,6,7};
     Node* head = arr2DLL(arr);
-    Node* newHead = deleteTail(head);
+    Node* newHead = deleteK(head,1);
     Node* temp = newHead;
     while(temp){
         cout<<temp->data<<" ";

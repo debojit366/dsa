@@ -34,10 +34,19 @@ Node* insertionBeforeHead(Node* head,int val){
     head->back = newHead;
     return newHead;
 }
+Node* insertionBeforeTail(Node* head,int val){
+    Node* temp = head;
+    while(temp->next != nullptr){
+        temp = temp->next;
+    }
+    Node* newTail = new Node(val,nullptr,temp);
+    temp->next = newTail;
+    return head;
+}
 int main(){
     vector <int> arr = {2,3,4,1};
     Node* head = arr2DLL(arr);
-    Node* newHead = insertionBeforeHead(head,10);
+    Node* newHead = insertionBeforeTail(head,10);
     Node* temp = newHead;
     while(temp){
         cout<<temp->data<<" ";
